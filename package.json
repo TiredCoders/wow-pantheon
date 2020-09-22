@@ -16,8 +16,7 @@
 		"debug": "node --trace-deprecation ./node_modules/.bin/webpack --config webpack.build.config.js --mode production",
 		"prettier:check": "prettier --check .",
 		"prettier:run": "prettier --write .",
-		"lint": "eslint src",
-		"lint:fix": "eslint src --fix"
+		"lint": "eslint src"
 	},
 	"author": "Andrea Gualandi",
 	"license": "ISC",
