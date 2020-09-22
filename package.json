@@ -1,47 +1,58 @@
 {
-  "name": "electron-react-boilerplate",
-  "version": "1.0.0",
-  "description": "Minimal configuration for electronjs and reactjs",
-  "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/andreagualandi/electron-react-boilerplate.git"
-  },
-  "scripts": {
-    "prod": "webpack --mode production --config webpack.build.config.js && electron --noDevServer .",
-    "dev": "webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js --mode development",
-    "build": "webpack --config webpack.build.config.js --mode production",
-    "package": "npm run build && electron-packager ./ --out=./builds --platform=all",
-    "packageWin": "npm run build && electron-packager ./ --out=./builds --platform=win32",
-    "debug": "node --trace-deprecation ./node_modules/.bin/webpack --config webpack.build.config.js --mode production"
-  },
-  "author": "Andrea Gualandi",
-  "license": "ISC",
-  "dependencies": {
-    "node-stream-zip": "^1.11.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
-    "babel-minify-webpack-plugin": "^0.3.1",
-    "css-loader": "^4.3.0",
-    "electron": "^10.1.2",
-    "electron-packager": "^15.1.0",
-    "file-loader": "^6.1.0",
-    "html-webpack-plugin": "^4.4.1",
-    "less": "^3.12.2",
-    "less-loader": "^7.0.1",
-    "mini-css-extract-plugin": "^0.11.2",
-    "prop-types": "^15.7.2",
-    "style-loader": "^1.2.1",
-    "styled-components": "^5.2.0",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
-  }
+	"name": "electron-react-boilerplate",
+	"version": "1.0.0",
+	"description": "Minimal configuration for electronjs and reactjs",
+	"main": "main.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/andreagualandi/electron-react-boilerplate.git"
+	},
+	"scripts": {
+		"prod": "webpack --mode production --config webpack.build.config.js && electron --noDevServer .",
+		"dev": "webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js --mode development",
+		"build": "webpack --config webpack.build.config.js --mode production",
+		"package": "npm run build && electron-packager ./ --out=./builds --platform=all",
+		"packageWin": "npm run build && electron-packager ./ --out=./builds --platform=win32",
+		"debug": "node --trace-deprecation ./node_modules/.bin/webpack --config webpack.build.config.js --mode production",
+		"prettier:check": "prettier --check .",
+		"prettier:run": "prettier --write .",
+		"lint": "eslint src",
+		"lint:fix": "eslint src --fix"
+	},
+	"author": "Andrea Gualandi",
+	"license": "ISC",
+	"dependencies": {
+		"node-stream-zip": "^1.11.3",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-router-dom": "^5.2.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.11.6",
+		"@babel/plugin-proposal-class-properties": "^7.10.4",
+		"@babel/preset-react": "^7.10.4",
+		"babel-loader": "^8.1.0",
+		"babel-minify-webpack-plugin": "^0.3.1",
+		"css-loader": "^4.3.0",
+		"electron": "^10.1.2",
+		"electron-packager": "^15.1.0",
+		"eslint": "^7.9.0",
+		"eslint-config-airbnb": "^18.2.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-import": "^2.22.0",
+		"eslint-plugin-react": "^7.20.6",
+		"eslint-plugin-react-hooks": "^4.1.2",
+		"file-loader": "^6.1.0",
+		"html-webpack-plugin": "^4.4.1",
+		"less": "^3.12.2",
+		"less-loader": "^7.0.1",
+		"mini-css-extract-plugin": "^0.11.2",
+		"prettier": "^2.1.2",
+		"prop-types": "^15.7.2",
+		"style-loader": "^1.2.1",
+		"styled-components": "^5.2.0",
+		"webpack": "^4.44.2",
+		"webpack-cli": "^3.3.12",
+		"webpack-dev-server": "^3.11.0"
+	}
 }

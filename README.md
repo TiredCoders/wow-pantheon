@@ -41,3 +41,4 @@ To package apps for all platforms (linux/windows/mac):
 
 ```bash
 $ npm run package
+```

@@ -1,12 +1,9 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import BaseLayoutCss, {
-  LayoutPropTypes,
-  LayoutPropDefault,
-} from "../BaseLayoutCss";
+import BaseLayoutCss, { LayoutPropTypes, LayoutPropDefault } from "../BaseLayoutCss";
 
 export const Nav = styled.nav`
-  ${BaseLayoutCss}
+	${BaseLayoutCss}
 `;
 
 Nav.propTypes = LayoutPropTypes;

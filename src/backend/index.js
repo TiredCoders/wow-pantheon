@@ -1,9 +1,11 @@
 "use strict";
 
-const ipc = require('electron').ipcMain
+const ipc = require("electron").ipcMain;
 
-ipc.on('data', handleMsg);
+ipc.on("data", handleMsg);
 
 function handleMsg(event, arg) {
-    event.sender.send('data', { msg: 'Response from backend' });
+	event.sender.send("data", {
+		msg: "Response from backend",
+	});
 }
