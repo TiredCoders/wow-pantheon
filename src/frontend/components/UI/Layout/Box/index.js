@@ -52,7 +52,6 @@ export const Box = styled.div`
 `;
 
 Box.propTypes = {
-	children: PropTypes.any,
 	/** Sets the CSS background property */
 	background: PropTypes.string,
 	/** Sets the CSS color property */

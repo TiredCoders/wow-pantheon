@@ -19,5 +19,8 @@ module.exports = {
 	rules: {
 		"import/no-named-as-default": 0,
 		"react/jsx-props-no-spreading": 0,
+		"import/no-extraneous-dependencies": 0,
+		radix: 0,
 	},
+	ignorePatterns: ["src/backend/**/*"],
 };
