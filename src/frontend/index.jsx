@@ -5,26 +5,26 @@ import "./global.less";
 import App from "./components/App";
 
 document.addEventListener(
-  "dragover",
-  (e) => {
-    e.preventDefault();
-    return false;
-  },
-  false
+	"dragover",
+	(e) => {
+		e.preventDefault();
+		return false;
+	},
+	false
 );
 
 document.addEventListener(
-  "drop",
-  (e) => {
-    e.preventDefault();
-    return false;
-  },
-  false
+	"drop",
+	(e) => {
+		e.preventDefault();
+		return false;
+	},
+	false
 );
 
 ReactDOM.render(
-  <MemoryRouter initialEntries={["/explore"]}>
-    <App />
-  </MemoryRouter>,
-  document.getElementById("root")
+	<MemoryRouter initialEntries={["/explore"]}>
+		<App />
+	</MemoryRouter>,
+	document.getElementById("root")
 );
