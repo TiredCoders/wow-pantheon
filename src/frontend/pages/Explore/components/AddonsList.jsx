@@ -23,37 +23,40 @@ const StyledBox = styled(Box)`
 `;
 
 export const AddonsList = ({ addonsList, loading = false }) => {
-	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
+	const { rows, prepareRow } = useTable({
 		columns,
 		data: addonsList,
 	});
 	return (
-		<StyledBox>
-			<table>
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Author</th>
-						<th>Installed version</th>
-						<th>Version</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{rows.map((row, i) => {
-						prepareRow(row);
-						return (
-							<tr {...row.getRowProps()}>
-								{row.cells.map((cell) => {
-									return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-								})}
-								<td>Action</td>
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
-		</StyledBox>
+		<>
+			{loading && "is loading..."}
+			<StyledBox>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Author</th>
+							<th>Installed version</th>
+							<th>Version</th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						{rows.map((row, i) => {
+							prepareRow(row);
+							return (
+								<tr {...row.getRowProps()}>
+									{row.cells.map((cell) => {
+										return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+									})}
+									<td>Action</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</StyledBox>
+		</>
 	);
 };
 
