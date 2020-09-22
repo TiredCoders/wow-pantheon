@@ -18,7 +18,7 @@ const Explore = () => {
 	const searchAddons = useCallback(() => {
 		const response = new Promise((resolve) => {
 			setLoadingList(true);
-			setTimeout(() => resolve(), 5000);
+			setTimeout(() => resolve(), 1000);
 		});
 		response.then(() => {
 			setAddonsList(mockAddonsList);
