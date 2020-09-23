@@ -19,7 +19,7 @@ const Explore = () => {
 	const [addonsList, setAddonsList] = useState([]);
 	const searchAddons = useCallback(() => {
 		//TODO here just for a test
-		ipcRenderer.invoke('api-addons', { action: 'list', data: 'ciao' }).then((result) => {
+		ipcRenderer.invoke('api-addons', { action: 'list' }).then((result) => {
 			console.log('result', result);
 		})
 
