@@ -7,6 +7,8 @@ import UIToken from "../../utils/UIToken";
 import { AddonsList } from "./components/AddonsList";
 import SearchForm from "./components/SearchForm";
 
+const { ipcRenderer } = require("electron");
+
 const H1 = styled.h1`
 	color: inherit;
 	font-size: ${UIToken.fontSizeLg};
@@ -16,6 +18,11 @@ const Explore = () => {
 	const [loadingList, setLoadingList] = useState(false);
 	const [addonsList, setAddonsList] = useState([]);
 	const searchAddons = useCallback(() => {
+		//TODO here just for a test
+		ipcRenderer.invoke('api-addons', { action: 'list', data: 'ciao' }).then((result) => {
+			console.log('result', result);
+		})
+
 		const response = new Promise((resolve) => {
 			setLoadingList(true);
 			setTimeout(() => resolve(), 1000);
