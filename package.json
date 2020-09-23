@@ -1,11 +1,11 @@
 {
-	"name": "electron-react-boilerplate",
+	"name": "wow-pantheon",
 	"version": "1.0.0",
-	"description": "Minimal configuration for electronjs and reactjs",
+	"description": "Addons manager for wow",
 	"main": "main.js",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/andreagualandi/electron-react-boilerplate.git"
+		"url": "git+https://github.com/TiredCoders/wow-pantheon.git"
 	},
 	"scripts": {
 		"prod": "webpack --mode production --config webpack.build.config.js --debug --progress --display-error-details && electron --noDevServer .",
@@ -18,8 +18,8 @@
 		"prettier:run": "prettier --write .",
 		"lint": "eslint src"
 	},
-	"author": "Andrea Gualandi",
-	"license": "ISC",
+	"author": "TiredCoders",
+	"license": "GPL-3.0",
 	"dependencies": {
 		"node-stream-zip": "^1.11.3",
 		"react": "^16.13.1",
