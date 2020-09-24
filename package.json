@@ -1,7 +1,7 @@
 {
 	"name": "wow-pantheon",
 	"version": "1.0.0",
-	"description": "Addons manager for wow",
+	"description": "Addons manager for World of Warcraft",
 	"main": "main.js",
 	"repository": {
 		"type": "git",
