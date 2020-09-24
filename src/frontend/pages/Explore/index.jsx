@@ -7,7 +7,7 @@ import UIToken from "../../utils/UIToken";
 import { AddonsList } from "./components/AddonsList";
 import SearchForm from "./components/SearchForm";
 
-const { ipcRenderer } = window;
+import { addons } from "../../utils/Client";
 
 const H1 = styled.h1`
 	color: inherit;
@@ -20,7 +20,7 @@ const Explore = () => {
 	const searchAddons = useCallback(() => {
 		//TODO here just for a test
 		setLoadingList(true);
-		ipcRenderer.invoke('api-addons', { action: 'search', data: { name: 'grid2' } }).then((result) => {
+		addons.search('grid2').then((result) => {
 			console.log('api response', result);
 			setAddonsList(result);
 			setLoadingList(false);
