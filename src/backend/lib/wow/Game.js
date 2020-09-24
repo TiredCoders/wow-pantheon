@@ -1,15 +1,27 @@
 const fs = require("fs");
 const fsPromises = fs.promises;
 const path = require("path");
+const tocParser = require("./TocFileParser");
 
-class Wow {
+class Game {
 	constructor() {
 		// todo
 	}
 
-	async getAddonsList(addonPath) {
+	async getAddonsList() {
+		const addonPath = '/home/andrea/Scaricati/test/';
 		const tocFiles = await this.getTocFiles(addonPath);
-		console.log(tocFiles);
+
+		const addons = [];
+
+		await Promise.all(
+			tocFiles.map(async (file) => {
+				const data = await tocParser(file);
+				addons.push({ author: data.author, version: data.version, title: data.title });
+			})
+		);
+
+		return addons;
 	}
 
 	async getTocFiles(addonPath) {
@@ -37,4 +49,4 @@ class Wow {
 	}
 }
 
-module.exports = new Wow();
+module.exports = new Game();

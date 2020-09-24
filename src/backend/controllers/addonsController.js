@@ -1,10 +1,10 @@
 "use strict";
 
 const Curseforge = require('../providers/curseforge');
+const Game = require('../lib/wow/Game');
 
 async function getInstalled(args) {
-    console.log('eccoci', args)
-    return [{ name: 'gigi', version: '1.3' }, { name: 'poasd', version: '3.1' }];
+    return Game.getAddonsList();
 }
 
 async function search(args) {
