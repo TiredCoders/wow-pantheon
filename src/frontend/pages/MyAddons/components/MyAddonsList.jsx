@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTable } from "react-table";
+import styled from "styled-components";
 import Box from "../../../components/UI/Layout/Box";
 import UIToken from "../../../utils/UIToken";
-import columns from "./columns";
-import styled from "styled-components";
+import columns from "./MyAddonsListColumns";
 
 const StyledBox = styled(Box)`
 	table {
@@ -22,7 +22,7 @@ const StyledBox = styled(Box)`
 	}
 `;
 
-export const AddonsList = ({ addonsList, loading = false }) => {
+export const MyAddonsList = ({ addonsList, loading = false }) => {
 	const { rows, prepareRow } = useTable({
 		columns,
 		data: addonsList,
@@ -42,7 +42,7 @@ export const AddonsList = ({ addonsList, loading = false }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{rows.map((row, i) => {
+						{rows.map((row) => {
 							prepareRow(row);
 							return (
 								<tr {...row.getRowProps()}>
@@ -60,7 +60,7 @@ export const AddonsList = ({ addonsList, loading = false }) => {
 	);
 };
 
-AddonsList.propTypes = {
+MyAddonsList.propTypes = {
 	addonsList: PropTypes.arrayOf(
 		PropTypes.shape({
 			name: PropTypes.string.isRequired,
@@ -72,8 +72,8 @@ AddonsList.propTypes = {
 	loading: PropTypes.bool,
 };
 
-AddonsList.defaultProps = {
+MyAddonsList.defaultProps = {
 	loading: false,
 };
 
-export default AddonsList;
+export default MyAddonsList;
