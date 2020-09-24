@@ -48,7 +48,7 @@ export default function Navbar() {
 			</FlexBox>
 			<FlexBox className="right-side">
 				<LinkBox padding={[UIToken.spacingSm]}>
-					<NavLink to="/options">Options</NavLink>
+					<NavLink to="/settings">Settings</NavLink>
 				</LinkBox>
 			</FlexBox>
 		</Nav>

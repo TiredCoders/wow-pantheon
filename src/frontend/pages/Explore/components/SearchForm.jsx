@@ -1,25 +1,7 @@
 import React, { useCallback, useState } from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
-import UIToken from "../../../utils/UIToken";
-
-const OutlinedInput = styled.input`
-	outline: none;
-	background-color: transparent;
-	border: 1px solid ${UIToken.secondaryColor};
-	color: ${UIToken.secondaryColor};
-	padding: ${UIToken.spacingMd}px;
-	font-size: ${UIToken.fontSizeMd};
-`;
-
-const OutlinedButton = styled.button`
-	padding: ${UIToken.spacingMd}px;
-	font-size: ${UIToken.fontSizeMd};
-	border: 1px solid ${UIToken.secondaryColor};
-	outline: none;
-	cursor: pointer;
-	background-color: ${UIToken.secondaryColor};
-`;
+import OutlinedInput from "../../../components/UI/Inputs/OutlinedInput";
+import OutlinedButton from "../../../components/UI/Buttons/OutlinedButton";
 
 const SearchForm = ({ onSubmitCallback }) => {
 	const [searchText, setSearchText] = useState();

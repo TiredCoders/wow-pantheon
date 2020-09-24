@@ -23,7 +23,7 @@ document.addEventListener(
 );
 
 ReactDOM.render(
-	<MemoryRouter initialEntries={["/explore"]}>
+	<MemoryRouter initialEntries={["/settings"]}>
 		<App />
 	</MemoryRouter>,
 	document.getElementById("root")
