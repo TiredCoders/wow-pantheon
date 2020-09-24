@@ -25,7 +25,8 @@ function createWindow() {
 		minHeight: 600,
 		show: false,
 		webPreferences: {
-			nodeIntegration: true,
+			nodeIntegration: false,
+			preload: path.join(__dirname, 'preload.js')
 		},
 	});
 	mainWindow.setMenu(null);

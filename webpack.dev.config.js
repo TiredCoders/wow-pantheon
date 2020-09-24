@@ -59,7 +59,7 @@ module.exports = {
 			},
 		],
 	},
-	target: "electron-renderer",
+	target: "web",
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: SRC_DIR + "/frontend/index.html",

@@ -7,7 +7,7 @@ import UIToken from "../../utils/UIToken";
 import { AddonsList } from "./components/AddonsList";
 import SearchForm from "./components/SearchForm";
 
-const { ipcRenderer } = require("electron");
+const { ipcRenderer } = window;
 
 const H1 = styled.h1`
 	color: inherit;
@@ -20,7 +20,7 @@ const Explore = () => {
 	const searchAddons = useCallback(() => {
 		//TODO here just for a test
 		ipcRenderer.invoke('api-addons', { action: 'list' }).then((result) => {
-			console.log('result', result);
+			console.log('api response', result);
 		})
 
 		const response = new Promise((resolve) => {
