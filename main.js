@@ -48,8 +48,11 @@ function createWindow() {
 	}
 	mainWindow.loadURL(indexPath);
 
+	//TODO go back to mainwindow.once when fixed Electron bug https://github.com/electron/electron/issues/25253
+
 	// Don't show until we are ready and loaded
-	mainWindow.once("ready-to-show", () => {
+	//mainWindow.once("ready-to-show", () => {
+	mainWindow.webContents.once('did-finish-load', function () {
 		mainWindow.show();
 		// Open the DevTools automatically if developing
 		if (dev) {
