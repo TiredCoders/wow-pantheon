@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import UIToken from "../../../utils/UIToken";
 import PropTypes from "prop-types";
+import UIToken from "../../../utils/UIToken";
 
 const OutlinedInput = styled.input`
 	outline: none;
@@ -22,10 +22,13 @@ const OutlinedButton = styled.button`
 `;
 
 const SearchForm = ({ onSubmitCallback }) => {
+	const [searchText, setSearchText] = useState();
+	const onChange = useCallback((e) => setSearchText(e.target.value), [setSearchText]);
+	const onClick = useCallback(() => onSubmitCallback(searchText), [onSubmitCallback, searchText]);
 	return (
 		<>
-			<OutlinedInput placeholder="Search for an addon..." />
-			<OutlinedButton onClick={onSubmitCallback}>Search</OutlinedButton>
+			<OutlinedInput onChange={onChange} placeholder="Search for an addon..." />
+			<OutlinedButton onClick={onClick}>Search</OutlinedButton>
 		</>
 	);
 };
