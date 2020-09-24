@@ -1,4 +1,6 @@
-const { httpGet } = require("../libs/utils");
+"use strict";
+
+const { httpGet } = require("../lib/utils");
 
 const CURSEFORGE_API = "https://addons-ecs.forgesvc.net/api/v2/addon/";
 const RELEASE_ALPHA = 3;

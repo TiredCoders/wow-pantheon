@@ -1,16 +1,14 @@
 "use strict";
 
 const ipc = require('electron').ipcMain
-const { getInstalled } = require('./controllers/addonController');
+const { getInstalled, search } = require('./controllers/addonsController');
 
 const routes = {
 	addon: {
 		list: getInstalled,
+		search: search,
 	},
 };
 
 
-ipc.handle('api-addons', async (event, args) => {
-	console.log(args)
-	return routes.addon[args.action](args)
-});
+ipc.handle('api-addons', async (event, args) => routes.addon[args.action](args));

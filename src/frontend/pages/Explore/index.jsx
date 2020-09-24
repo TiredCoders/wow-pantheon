@@ -19,18 +19,21 @@ const Explore = () => {
 	const [addonsList, setAddonsList] = useState([]);
 	const searchAddons = useCallback(() => {
 		//TODO here just for a test
-		ipcRenderer.invoke('api-addons', { action: 'list' }).then((result) => {
+		setLoadingList(true);
+		ipcRenderer.invoke('api-addons', { action: 'search', data: { name: 'grid2' } }).then((result) => {
 			console.log('api response', result);
-		})
-
-		const response = new Promise((resolve) => {
-			setLoadingList(true);
-			setTimeout(() => resolve(), 1000);
-		});
-		response.then(() => {
-			setAddonsList(mockAddonsList);
+			setAddonsList(result);
 			setLoadingList(false);
-		});
+		})
+		/* 
+				const response = new Promise((resolve) => {
+					setLoadingList(true);
+					setTimeout(() => resolve(), 1000);
+				});
+				response.then(() => {
+					setAddonsList(mockAddonsList);
+					setLoadingList(false);
+				}); */
 	}, [setAddonsList]);
 
 	return (
