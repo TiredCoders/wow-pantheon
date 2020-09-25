@@ -5,22 +5,36 @@ const parseTOC = require("./TocFileParser");
 
 class Game {
 	constructor() {
-		// todo
+		this.addons = { main: [], dependencies: [] };
 	}
 
 	async getAddonsList() {
 		const addonPath = '/home/andrea/Scaricati/test/';
 		const tocFiles = await this.getTocFiles(addonPath);
 
-		const addons = [];
 		await Promise.all(
 			tocFiles.map(async (file) => {
 				const data = await parseTOC(file);
-				addons.push({ author: data.author, version: data.version, name: data.title });
+				const addon = {
+					author: data.author,
+					installedVersion: data.version,
+					version: 'N/A',
+					name: data.title,
+					dependencies: data.dependencies,
+				};
+				this.addAddon(addon);
 			})
 		);
 
-		return addons;
+		return this.addons.main;
+	}
+
+	addAddon(data) {
+		if (!data.dependencies) {
+			this.addons.main.push(data);
+		} else {
+			this.addons.dependencies.push(data);
+		}
 	}
 
 	async getTocFiles(addonPath) {
