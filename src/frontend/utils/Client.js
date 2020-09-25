@@ -7,7 +7,8 @@ const addons = {
 };
 
 const settings = {
-    get: (name) => call('api-settings', 'get', { name: name }),
+    get: (name) => call('api-settings', 'get', { setting: name }),
+    set: (name, value) => call('api-settings', 'set', { setting: name, value: value }),
 };
 
 async function call(endpoint, action, data = {}) {

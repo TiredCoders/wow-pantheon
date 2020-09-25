@@ -5,6 +5,7 @@ import Box from "../../components/UI/Layout/Box";
 import UIToken from "../../utils/UIToken";
 import OutlinedInput from "../../components/UI/Inputs/OutlinedInput";
 import OutlinedButton from "../../components/UI/Buttons/OutlinedButton";
+import { settings } from "../../utils/Client";
 
 const TableStyles = styled(Box)`
 	table {
@@ -27,11 +28,14 @@ const TableStyles = styled(Box)`
 
 const Settings = () => {
 	// TODO: ALREADY SAVE VALUE SHOULD BE LOADED AS USESTATE ARG
+	settings.get('wowpath').then(res => console.log(res));
+
 	const [wowPath, setWowPath] = useState();
 	const onChangeWowPath = useCallback((e) => setWowPath(e.target.value), [setWowPath]);
 	const onWowPathSave = useCallback(() => {
 		// TODO: INSERT HERE CALLBACK TO BACKEND WITH WOW PATH VALUE
 		console.log("Wow path value:", wowPath);
+		settings.set('wowpath', wowPath).then(res => console.log(res));
 	}, [wowPath]);
 
 	return (
