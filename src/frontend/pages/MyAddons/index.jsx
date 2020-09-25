@@ -3,7 +3,7 @@ import Box from "../../components/UI/Layout/Box";
 import { H1 } from "../../components/UI/Heading";
 import UIToken from "../../utils/UIToken";
 import MyAddonsList from "./components/MyAddonsList";
-import mockAddonsList from "../../mocks/mockAddonsList";
+import { addons } from "../../utils/Client";
 
 const MyAddons = () => {
 	const [addonsList, setAddonsList] = useState([]);
@@ -11,10 +11,9 @@ const MyAddons = () => {
 
 	useEffect(() => {
 		setLoadingList(true);
-		const response = new Promise((resolve) => setTimeout(() => resolve(), 1000));
-		response.then(() => {
+		addons.list().then((res) => {
 			setLoadingList(false);
-			setAddonsList(mockAddonsList);
+			setAddonsList(res);
 		});
 	}, []);
 

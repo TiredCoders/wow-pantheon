@@ -1,7 +1,7 @@
 const fs = require("fs");
 const fsPromises = fs.promises;
 const path = require("path");
-const tocParser = require("./TocFileParser");
+const parseTOC = require("./TocFileParser");
 
 class Game {
 	constructor() {
@@ -13,11 +13,10 @@ class Game {
 		const tocFiles = await this.getTocFiles(addonPath);
 
 		const addons = [];
-
 		await Promise.all(
 			tocFiles.map(async (file) => {
-				const data = await tocParser(file);
-				addons.push({ author: data.author, version: data.version, title: data.title });
+				const data = await parseTOC(file);
+				addons.push({ author: data.author, version: data.version, name: data.title });
 			})
 		);
 
@@ -38,7 +37,7 @@ class Game {
 					files.forEach((file) => {
 						const ext = path.extname(file);
 						if (ext === ".toc") {
-							tocFiles.push(path.join(addonPath, file));
+							tocFiles.push(path.join(dir, file));
 						}
 					});
 				}

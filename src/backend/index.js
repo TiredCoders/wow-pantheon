@@ -10,5 +10,13 @@ const routes = {
 	},
 };
 
+async function addonsRoute(event, args) {
+	try {
+		return await routes.addon[args.action](args)
+	} catch (e) {
+		console.error('Error:', e);
+		return null;
+	}
+}
 
-ipc.handle('api-addons', async (event, args) => routes.addon[args.action](args));
+ipc.handle('api-addons', addonsRoute);
