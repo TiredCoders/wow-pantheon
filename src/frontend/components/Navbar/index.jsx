@@ -5,19 +5,47 @@ import Nav from "../UI/Layout/Nav";
 import UIToken from "../../utils/UIToken";
 import FlexBox from "../UI/Layout/FlexBox";
 import Box from "../UI/Layout/Box";
+import FormatListBulletedOutlinedIcon from "@material-ui/icons/FormatListBulletedOutlined";
+import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
+import SettingsIcon from "@material-ui/icons/Settings";
+
+const LogoBox = styled(Box)`
+	font-family: Roboto;
+	align-self: center;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 22px;
+	color: ${UIToken.secondaryColor};
+`;
 
 const LinkBox = styled(Box)`
 	a {
-		font-size: ${UIToken.fontSizeMd};
-		color: ${UIToken.secondaryColor};
-		text-transform: uppercase;
+		font-family: Roboto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: white;
+		svg {
+			font-size: 22px;
+			margin-bottom: 3px;
+		}
+		span {
+			font-size: 13px;
+		}
+
+		:hover {
+			color: ${UIToken.secondaryColor};
+		}
+
 		text-decoration: none;
 		outline: none;
 		cursor: pointer;
 
 		&.active {
-			border-bottom: 2px solid ${UIToken.secondaryColor};
+			color: ${UIToken.secondaryColor};
 		}
+
+		transition: color 0.2s ease-in-out;
 	}
 `;
 
@@ -32,23 +60,31 @@ export default function Navbar() {
 			borderWidth={[0, 0, 1]}
 			borderColor={UIToken.secondaryColor}
 			borderStyle="solid"
+			padding={[UIToken.paddingXxs, UIToken.paddingLg]}
 		>
 			<FlexBox className="left-side">
-				<LinkBox padding={[UIToken.spacingSm]}>
-					<NavLink exact to="/">
-						Logo
+				<LinkBox padding={[UIToken.spacingXxs]}>
+					<NavLink to="/my-addons">
+						<FormatListBulletedOutlinedIcon />
+						<span>Addons</span>
 					</NavLink>
 				</LinkBox>
-				<LinkBox padding={[UIToken.spacingSm]}>
-					<NavLink to="/my-addons">My addons</NavLink>
-				</LinkBox>
-				<LinkBox padding={[UIToken.spacingSm]}>
-					<NavLink to="/explore">Explore</NavLink>
+				<LinkBox padding={[UIToken.spacingXxs]}>
+					<NavLink to="/explore">
+						<ExploreOutlinedIcon />
+						<span>Explore</span>
+					</NavLink>
 				</LinkBox>
 			</FlexBox>
+			<FlexBox className="center-side">
+				<LogoBox>Pantheon</LogoBox>
+			</FlexBox>
 			<FlexBox className="right-side">
-				<LinkBox padding={[UIToken.spacingSm]}>
-					<NavLink to="/settings">Settings</NavLink>
+				<LinkBox padding={[UIToken.spacingXxs]}>
+					<NavLink to="/settings">
+						<SettingsIcon />
+						<span>Settings</span>
+					</NavLink>
 				</LinkBox>
 			</FlexBox>
 		</Nav>
