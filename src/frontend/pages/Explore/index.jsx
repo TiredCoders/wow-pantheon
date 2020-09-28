@@ -20,14 +20,18 @@ const Explore = () => {
 		[setAddonsList, setLoadingList]
 	);
 
+	const installAddon = useCallback((row) => {
+		console.log("Install Callback!", row);
+	}, []);
+
 	return (
 		<Box color={UIToken.secondaryColor} fullWidth fullHeight padding={[UIToken.spacingLg]}>
-			<H1>Explores</H1>
+			<H1>Explore</H1>
 			<Box fullWidth>
 				<SearchForm onSubmitCallback={searchAddons} />
 			</Box>
 			<Box fullWidth fullHeight margin={[UIToken.spacingMd, 0]}>
-				<ExploreList addonsList={addonsList} loading={loadingList} />
+				<ExploreList addonsList={addonsList} loading={loadingList} installCb={installAddon} />
 			</Box>
 		</Box>
 	);

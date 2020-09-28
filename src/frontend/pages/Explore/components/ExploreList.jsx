@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTable } from "react-table";
 import styled from "styled-components";
 import Box from "../../../components/UI/Layout/Box";
 import UIToken from "../../../utils/UIToken";
 import columns from "./columns";
+import ExploreListRow from "./ExploreListRow";
 
 const StyledBox = styled(Box)`
 	table {
@@ -22,11 +23,13 @@ const StyledBox = styled(Box)`
 	}
 `;
 
-export const ExploreList = ({ addonsList, loading = false }) => {
+export const ExploreList = ({ addonsList, installCb, loading = false }) => {
 	const { rows, prepareRow } = useTable({
 		columns,
 		data: addonsList,
 	});
+
+	const onInstall = useCallback((row) => installCb(row), [installCb]);
 	return (
 		<>
 			{loading && "is loading..."}
@@ -44,14 +47,7 @@ export const ExploreList = ({ addonsList, loading = false }) => {
 					<tbody>
 						{rows.map((row) => {
 							prepareRow(row);
-							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
-										return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-									})}
-									<td>Action</td>
-								</tr>
-							);
+							return <ExploreListRow row={row} onInstall={onInstall} key={row.id} />;
 						})}
 					</tbody>
 				</table>
@@ -69,6 +65,7 @@ ExploreList.propTypes = {
 			version: PropTypes.string.isRequired,
 		})
 	).isRequired,
+	installCb: PropTypes.func.isRequired,
 	loading: PropTypes.bool,
 };
 
