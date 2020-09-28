@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu, Tray } = require("electron");
 const path = require("path");
 const url = require("url");
 require("./src/backend/index");
@@ -17,6 +17,7 @@ if (
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let tray;
 
 function createWindow() {
 	// Create the browser window.
@@ -48,6 +49,8 @@ function createWindow() {
 	}
 	mainWindow.loadURL(indexPath);
 
+	createTray();
+
 	//TODO go back to mainwindow.once when fixed Electron bug https://github.com/electron/electron/issues/25253
 
 	// Don't show until we are ready and loaded
@@ -61,11 +64,22 @@ function createWindow() {
 	});
 
 	// Emitted when the window is closed.
-	mainWindow.on("closed", function () {
+	mainWindow.on("closed", function (e) {
 		// Dereference the window object, usually you would store windows
 		// in an array if your app supports multi windows, this is the time
 		// when you should delete the corresponding element.
 		mainWindow = null;
+	});
+
+	mainWindow.on('minimize', function (event) {
+		event.preventDefault();
+		mainWindow.hide();
+		tray = createTray();
+	});
+
+	mainWindow.on('restore', function (event) {
+		mainWindow.show();
+		tray.destroy();
 	});
 }
 
@@ -93,3 +107,27 @@ app.on("activate", function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+function createTray() {
+	let appIcon = new Tray(path.join(__dirname, "icon16.png"));
+	const contextMenu = Menu.buildFromTemplate([
+		{
+			label: 'Show', click: function () {
+				mainWindow.show();
+			}
+		},
+		{
+			label: 'Exit', click: function () {
+				app.isQuiting = true;
+				app.quit();
+			}
+		}
+	]);
+
+	appIcon.on('double-click', function (event) {
+		mainWindow.show();
+	});
+	appIcon.setToolTip('Tray Tutorial');
+	appIcon.setContextMenu(contextMenu);
+	return appIcon;
+}
