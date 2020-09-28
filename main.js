@@ -29,6 +29,7 @@ function createWindow() {
 			nodeIntegration: false,
 			preload: path.join(__dirname, 'preload.js')
 		},
+		icon: path.join(__dirname, "icon16.png")
 	});
 	mainWindow.setMenu(null);
 	// and load the index.html of the app.
