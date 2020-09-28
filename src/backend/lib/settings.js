@@ -8,7 +8,7 @@ const { app } = require('electron');
 class Settings {
     constructor() {
         this.conf = {
-            wowpath: 'asd',
+            wowpath: '',
         };
         this.fileName = null;
     }

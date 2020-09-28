@@ -2,9 +2,16 @@
 
 const Curseforge = require('../providers/curseforge');
 const Game = require('../lib/wow/Game');
+const Settings = require("../lib/settings");
 
 async function getInstalled(args) {
-    return Game.getAddonsList();
+    await Settings.load();
+    if (!Settings.wowpath) {
+        throw new Error("Wow Path not defined");
+    }
+
+    const game = new Game(Settings.wowpath, 'retail');
+    return game.getAddonsList();
 }
 
 async function search(args) {
