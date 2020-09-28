@@ -2,14 +2,16 @@ const fs = require("fs");
 const fsPromises = fs.promises;
 const path = require("path");
 const parseTOC = require("./TocFileParser");
+const Structure = require("./Structure");
 
 class Game {
-	constructor() {
+	constructor(wowPath, gameType) {
+		this.structure = new Structure(wowPath, gameType);
 		this.addons = { main: [], dependencies: [] };
 	}
 
 	async getAddonsList() {
-		const addonPath = '/home/andrea/Scaricati/test/';
+		const addonPath = this.structure.addons;
 		const tocFiles = await this.getTocFiles(addonPath);
 
 		await Promise.all(
@@ -62,4 +64,4 @@ class Game {
 	}
 }
 
-module.exports = new Game();
+module.exports = Game;
