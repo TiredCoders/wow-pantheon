@@ -15,5 +15,4 @@ async function setSetting(args) {
     return Settings.save();
 }
 
-
 module.exports = { getSetting, setSetting };

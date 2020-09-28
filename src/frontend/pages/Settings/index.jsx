@@ -5,7 +5,7 @@ import Box from "../../components/UI/Layout/Box";
 import UIToken from "../../utils/UIToken";
 import OutlinedInput from "../../components/UI/Inputs/OutlinedInput";
 import OutlinedButton from "../../components/UI/Buttons/OutlinedButton";
-import { settings } from "../../utils/Client";
+import { settings, dialog } from "../../utils/Client";
 
 const TableStyles = styled(Box)`
 	table {
@@ -29,7 +29,12 @@ const TableStyles = styled(Box)`
 const Settings = () => {
 	// TODO: ALREADY SAVE VALUE SHOULD BE LOADED AS USESTATE ARG
 	settings.get('wowpath').then(res => console.log(res));
-
+	dialog.getDir('Select WoW directory', 'Select').then(path => {
+		return path ? path : '';
+	}).then(path => {
+		console.log('selected path', path);
+		//TODO save the path in the input box 
+	});
 	const [wowPath, setWowPath] = useState();
 	const onChangeWowPath = useCallback((e) => setWowPath(e.target.value), [setWowPath]);
 	const onWowPathSave = useCallback(() => {

@@ -3,6 +3,7 @@
 const ipc = require('electron').ipcMain
 const { getInstalled, search } = require('./controllers/addonsController');
 const { getSetting, setSetting } = require('./controllers/settingsController');
+const { getDir } = require('./controllers/utilsController');
 
 const routes = {
 	addons: {
@@ -13,6 +14,9 @@ const routes = {
 		get: getSetting,
 		set: setSetting,
 	},
+	utils: {
+		getDir: getDir,
+	}
 };
 
 async function addonsRoute(event, args) {
@@ -33,5 +37,15 @@ async function settingsRoute(event, args) {
 	}
 }
 
+async function utilsRoute(event, args) {
+	try {
+		return await routes.utils[args.action](args)
+	} catch (e) {
+		console.error('Error:', e);
+		return null;
+	}
+}
+
 ipc.handle('api-addons', addonsRoute);
 ipc.handle('api-settings', settingsRoute);
+ipc.handle('api-utils', utilsRoute);

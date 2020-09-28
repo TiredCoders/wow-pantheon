@@ -4,6 +4,18 @@ const path = require("path");
 
 const StreamZip = require("node-stream-zip");
 
+const { dialog } = require('electron');
+
+async function dirSelector(title = "Directory selector", buttonLabel = "Select") {
+	let result = await dialog.showOpenDialog({
+		title: title,
+		buttonLabel: buttonLabel,
+		properties: ['openDirectory']
+	});
+
+	return !result.canceled ? result.filePaths[0] : null;
+}
+
 function httpGet(url) {
 	return new Promise((resolve, rejects) => {
 		https
@@ -101,8 +113,4 @@ function unzip(filePath, outPath) {
 	});
 }
 
-module.exports = {
-	httpGet: httpGet,
-	download: download,
-	unzip: unzip,
-};
+module.exports = { httpGet, download, unzip, dirSelector, };
