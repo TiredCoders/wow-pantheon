@@ -23,13 +23,14 @@ class Settings {
 
     load() {
         return new Promise((resolve, reject) => {
-            this.fileName = path.join(app.getPath('userData'), 'conf.json');
             //already loaded
             if (this.fileName) {
                 return resolve();
             }
 
-            fs.readFile(this.fileName, function (err, data) {
+            this.fileName = path.join(app.getPath('userData'), 'conf.json');
+
+            fs.readFile(this.fileName, (err, data) => {
                 if (!err) {
                     this.conf = JSON.parse(data);
                     return resolve();
