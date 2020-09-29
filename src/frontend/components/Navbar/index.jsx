@@ -65,13 +65,13 @@ export default function Navbar() {
 		>
 			<FlexBox className="left-side">
 				<LinkBox padding={[UIToken.spacingXxs]}>
-					<NavLink to="/my-addons">
+					<NavLink to="/app/my-addons">
 						<FormatListBulletedOutlinedIcon />
 						<span>Addons</span>
 					</NavLink>
 				</LinkBox>
 				<LinkBox padding={[UIToken.spacingXxs]}>
-					<NavLink to="/explore">
+					<NavLink to="/app/explore">
 						<ExploreOutlinedIcon />
 						<span>Explore</span>
 					</NavLink>
@@ -82,7 +82,7 @@ export default function Navbar() {
 			</FlexBox>
 			<FlexBox className="right-side">
 				<LinkBox padding={[UIToken.spacingXxs]}>
-					<NavLink to="/settings">
+					<NavLink to="/app/settings">
 						<SettingsIcon />
 						<span>Settings</span>
 					</NavLink>

@@ -8,9 +8,9 @@ import Settings from "../../pages/Settings";
 const ContentRouter = () => (
 	<Switch>
 		<Route exact path="/" component={Home} />
-		<Route path="/my-addons" component={MyAddons} />
-		<Route path="/explore" component={Explore} />
-		<Route path="/settings" component={Settings} />
+		<Route path="/app/my-addons" component={MyAddons} />
+		<Route path="/app/explore" component={Explore} />
+		<Route path="/app/settings" component={Settings} />
 	</Switch>
 );
 
