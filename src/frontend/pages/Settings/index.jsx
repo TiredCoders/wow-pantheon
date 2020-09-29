@@ -53,7 +53,7 @@ const Settings = () => {
 	}, [setWowPath]);
 
 	return (
-		<Box color={UIToken.secondaryColor} fullWidth fullHeight padding={[UIToken.spacingLg]}>
+		<>
 			<H1>Settings</H1>
 			<TableStyles fullWidth fullHeight margin={[UIToken.spacingMd, 0]}>
 				<table>
@@ -71,7 +71,7 @@ const Settings = () => {
 					</tbody>
 				</table>
 			</TableStyles>
-		</Box>
+		</>
 	);
 };
 

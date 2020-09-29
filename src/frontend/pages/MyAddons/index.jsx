@@ -18,12 +18,12 @@ const MyAddons = () => {
 	}, []);
 
 	return (
-		<Box color={UIToken.secondaryColor} fullWidth fullHeight padding={[UIToken.spacingLg]}>
+		<>
 			<H1>Explores</H1>
 			<Box fullWidth fullHeight margin={[UIToken.spacingMd, 0]}>
 				<MyAddonsList addonsList={addonsList} loading={loadingList} />
 			</Box>
-		</Box>
+		</>
 	);
 };
 

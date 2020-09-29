@@ -25,15 +25,15 @@ const Explore = () => {
 	}, []);
 
 	return (
-		<Box color={UIToken.secondaryColor} fullWidth fullHeight padding={[UIToken.spacingLg]}>
+		<>
 			<H1>Explore</H1>
 			<Box fullWidth>
 				<SearchForm onSubmitCallback={searchAddons} />
 			</Box>
-			<Box fullWidth fullHeight margin={[UIToken.spacingMd, 0]}>
+			<Box margin={[UIToken.spacingMd, 0]}>
 				<ExploreList addonsList={addonsList} loading={loadingList} installCb={installAddon} />
 			</Box>
-		</Box>
+		</>
 	);
 };
 

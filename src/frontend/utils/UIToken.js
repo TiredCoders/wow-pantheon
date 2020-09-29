@@ -1,4 +1,7 @@
 export default {
+	neutral: "#383737",
+	neutralDark: "#202020",
+
 	primaryColor: "#211510",
 	secondaryColor: "#f8b700",
 	tertiaryColor: "#202020",

@@ -53,7 +53,7 @@ export default function Navbar() {
 	return (
 		<Nav
 			className="Navbar"
-			background={UIToken.primaryColor}
+			background={UIToken.neutralDark}
 			fullWidth
 			display="flex"
 			justifyContent="space-between"
@@ -61,6 +61,7 @@ export default function Navbar() {
 			borderColor={UIToken.secondaryColor}
 			borderStyle="solid"
 			padding={[UIToken.paddingXxs, UIToken.paddingLg]}
+			height="61px"
 		>
 			<FlexBox className="left-side">
 				<LinkBox padding={[UIToken.spacingXxs]}>

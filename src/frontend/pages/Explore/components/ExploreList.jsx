@@ -8,6 +8,7 @@ import columns from "./columns";
 import ExploreListRow from "./ExploreListRow";
 
 const StyledBox = styled(Box)`
+	overflow: auto;
 	table {
 		border-collapse: collapse;
 		width: 100%;

@@ -17,6 +17,8 @@ export const Box = styled.div`
 	margin: ${({ margin, unit }) => margin && (Array.isArray(margin) ? margin.join(`${unit} `) + unit : `${margin}`)};
 	box-sizing: ${({ boxSizing }) => boxSizing};
 	height: ${({ height }) => height};
+	min-height: ${({ minHeight }) => minHeight};
+	max-height: ${({ maxHeight }) => maxHeight};
 	width: ${({ width }) => width};
 	min-width: ${({ minWidth }) => minWidth};
 	max-width: ${({ maxWidth }) => maxWidth};
@@ -36,6 +38,7 @@ export const Box = styled.div`
 	border-width: ${({ borderWidth, borderUnit }) =>
 		!Array.isArray(borderWidth) ? borderWidth : borderWidth.join(`${borderUnit} `) + borderUnit};
 
+	border-radius: ${({ borderRadius }) => borderRadius};
 	border-color: ${({ borderColor }) => borderColor};
 	border-style: ${({ borderStyle }) => borderStyle};
 
@@ -79,9 +82,13 @@ Box.propTypes = {
 	unit: PropTypes.oneOf(["px", "em"]),
 	/** Height applied to the box */
 	height: PropTypes.string,
+	/** min-height applied to the box */
+	minHeight: PropTypes.string,
+	/** max-width applied to the box */
+	maxHeight: PropTypes.string,
 	/** Width applied to the box */
 	width: PropTypes.string,
-	/** Min-Width applied to the box */
+	/** min-width applied to the box */
 	minWidth: PropTypes.string,
 	/** Max-Width applied to the box */
 	maxWidth: PropTypes.string,
@@ -111,6 +118,8 @@ Box.propTypes = {
 	fullWidth: PropTypes.bool,
 	/** If true, will take 100% height */
 	fullHeight: PropTypes.bool,
+	/** Sets the border radius of the Box */
+	borderRadius: PropTypes.string,
 };
 
 Box.defaultProps = {
