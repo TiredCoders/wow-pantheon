@@ -22,6 +22,9 @@ const Explore = () => {
 
 	const installAddon = useCallback((row) => {
 		console.log("Install Callback!", row);
+		addons.install(row).then((result) => {
+			console.log('Finish installation', result);
+		});
 	}, []);
 
 	return (

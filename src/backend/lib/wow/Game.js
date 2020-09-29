@@ -10,6 +10,10 @@ class Game {
 		this.addons = { main: [], dependencies: [] };
 	}
 
+	get addonsPath() {
+		return this.structure.addons;
+	}
+
 	async getAddonsList() {
 		const addonPath = this.structure.addons;
 		const tocFiles = await this.getTocFiles(addonPath);
@@ -19,12 +23,13 @@ class Game {
 				const data = await parseTOC(file);
 				const addon = {
 					author: data.author,
-					installedVersion: data.version,
+					installedVersion: data.version || 'N/A',
 					version: 'N/A',
 					name: data.title,
 					dependencies: data.dependencies,
 				};
 				this.addAddon(addon);
+
 			})
 		);
 
@@ -32,7 +37,7 @@ class Game {
 	}
 
 	addAddon(data) {
-		if (!data.dependencies) {
+		if (!data.dependencies && data.installedVersion !== 'N/A') {
 			this.addons.main.push(data);
 		} else {
 			this.addons.dependencies.push(data);

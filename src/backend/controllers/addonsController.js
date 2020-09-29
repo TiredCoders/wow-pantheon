@@ -1,8 +1,11 @@
 "use strict";
 
 const Curseforge = require('../providers/curseforge');
+const Parser = require('../providers/parser');
 const Game = require('../lib/wow/Game');
 const Settings = require("../lib/settings");
+const { download, unzip } = require("../lib/utils");
+const fs = require('fs');
 
 async function getInstalled(args) {
     await Settings.load();
@@ -19,22 +22,40 @@ async function search(args) {
     let result = [];
     let addons = [];
 
-    try {
-        result = await Curseforge.searchAddon(data.name);
-    } catch (e) {
-        console.error('Search - Provider error', e);
-    }
+    result = await Curseforge.searchAddon(data.name);
 
-    console.log(result);
-    addons = result.map(({ name, dateModified }) => ({
-        name: name,
-        author: "author 1",
-        installedVersion: "1",
-        version: "2",
-    }));
-
+    await Promise.all(
+        result.map(async (item) => {
+            const parsedData = await Parser.getAddon(item, Parser.gameFlavor.retail, Parser.releaseType.final, '9.0.1');
+            //console.log(parsedData);
+            addons.push({ ...parsedData, author: "author 1", installedVersion: "1", });
+        })
+    );
 
     return addons;
 }
 
-module.exports = { getInstalled, search };
+async function install(args) {
+    console.log(args);
+
+    const { data } = args;
+    await Settings.load();
+    if (!Settings.wowpath) {
+        throw new Error("Wow Path not defined");
+    }
+
+    const game = new Game(Settings.wowpath, 'retail');
+
+
+    console.log('Downloading:', data.downloadUrl);
+    // --- download ---
+    const file = await download(data.downloadUrl, game.addonsPath, (res) => { console.log(res) });
+    console.log("\nDecompress\n");
+    const result = await unzip(file, game.addonsPath);
+    console.log(`\nDecompressed ${result} elements\n`);
+    fs.unlinkSync(file)
+    console.log("Done");
+
+}
+
+module.exports = { getInstalled, search, install };
