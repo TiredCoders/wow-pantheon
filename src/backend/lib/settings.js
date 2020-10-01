@@ -9,6 +9,7 @@ class Settings {
     constructor() {
         this.conf = {
             wowpath: '',
+            addons: { main: [], dependencies: [] },
         };
         this.fileName = null;
     }
@@ -19,6 +20,14 @@ class Settings {
 
     set wowpath(value) {
         this.conf.wowpath = value;
+    }
+
+    get addons() {
+        return this.conf.addons;
+    }
+
+    set addons(value) {
+        this.conf.addons = value;
     }
 
     load() {

@@ -14,7 +14,12 @@ async function getInstalled(args) {
     }
 
     const game = new Game(Settings.wowpath, 'retail');
-    return game.getAddonsList();
+    const addons = await game.getAddonsList();
+
+    Settings.addons = addons;
+    await Settings.save();
+
+    return addons.main;
 }
 
 async function search(args) {

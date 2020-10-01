@@ -33,7 +33,7 @@ class Game {
 			})
 		);
 
-		return this.addons.main;
+		return this.addons;
 	}
 
 	addAddon(data) {
