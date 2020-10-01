@@ -62,6 +62,10 @@ async function install(args) {
     console.log("\nDecompress\n");
     const result = await unzip(file, game.addonsPath);
     console.log(`\nDecompressed ${result} elements\n`);
+
+    Settings.addons.main.push(data);
+    await Settings.save();
+
     fs.unlinkSync(file)
     console.log("Done");
 
