@@ -12,10 +12,14 @@ async function getInstalled(args) {
     if (!Settings.wowpath) {
         throw new Error("Wow Path not defined");
     }
-
+    //if we have already a list we return that
+    if (Settings.addons.main.length > 0) {
+        return Settings.addons.main;
+    }
+    //scanning for addons inside wow folder
     const game = new Game(Settings.wowpath, 'retail');
     const addons = await game.getAddonsList();
-
+    //saving them in the config file
     Settings.addons = addons;
     await Settings.save();
 
