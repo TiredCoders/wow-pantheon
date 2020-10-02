@@ -3,13 +3,13 @@
 const fs = require("fs");
 const fsPromises = fs.promises;
 const path = require("path");
-const { app } = require('electron');
+const {app} = require('electron');
 
-class Settings {
+class Storage {
     constructor() {
         this.conf = {
             wowpath: '',
-            addons: { main: [], dependencies: [] },
+            addons: {},
         };
         this.fileName = null;
     }
@@ -27,7 +27,13 @@ class Settings {
     }
 
     set addons(value) {
-        this.conf.addons = value;
+        value.forEach(addon => {
+            this.conf.addons[addon.name] = addon;
+        });
+    }
+
+    addAddon(addon) {
+        this.conf.addons[addon.name] = addon;
     }
 
     load() {
@@ -58,4 +64,4 @@ class Settings {
 }
 
 
-module.exports = new Settings();
+module.exports = new Storage();
