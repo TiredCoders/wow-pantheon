@@ -27,13 +27,28 @@ class Storage {
     }
 
     set addons(value) {
-        value.forEach(addon => {
-            this.conf.addons[addon.name] = addon;
-        });
+        for (const addonName in value) {
+            this.conf.addons[addonName] = value[addonName];
+        }
+    }
+
+    getAddonsHasArray() {
+        return Object.values(this.conf.addons);
+    }
+
+    hasAddons() {
+        return Object.keys(this.conf.addons).length > 0;
     }
 
     addAddon(addon) {
-        this.conf.addons[addon.name] = addon;
+        //todo temporary
+        if (this.conf.addons[addon.name]) {
+            delete addon.installedVersion;
+            delete addon.dir;
+            this.conf.addons[addon.name] = {...this.conf.addons[addon.name], ...addon};
+        } else {
+            this.conf.addons[addon.name] = addon;
+        }
     }
 
     load() {

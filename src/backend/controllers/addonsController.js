@@ -13,8 +13,9 @@ async function getInstalled(args) {
         throw new Error("Wow Path not defined");
     }
     //if we have already a list we return that
-    if (Storage.addons.length > 0) {
-        return Storage.addons;
+    if (Storage.hasAddons()) {
+        console.log('storage', Storage.addons)
+        return Storage.getAddonsHasArray();
     }
     //scanning for addons inside wow folder
     const game = new Game(Storage.wowpath, 'retail');

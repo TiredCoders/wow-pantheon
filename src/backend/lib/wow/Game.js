@@ -18,14 +18,14 @@ class Game {
 		const addonPath = this.structure.addons;
 		const tocFiles = await this.getTocFiles(addonPath);
 
-		const addons = [];
+		const addons = {};
 		await Promise.all(
 			tocFiles.map(async (file) => {
 				const data = await parseTOC(file);
 
 				if (!data.dependencies && data.version) {
 					const addon = new Addon(data.title, data.version, data.author);
-					addons.push(addon);
+					addons[addon.name] = addon;
 				}
 
 			})

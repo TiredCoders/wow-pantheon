@@ -34,7 +34,6 @@ async function getAddon(data, gameFlavor, releaseType, gameVersion) {
     addon.summary = data.summary;
     addon.version = latestFile.displayName;
     addon.downloadUrl = latestFile.downloadUrl;
-    addon.downloadCount = data.downloadCount;
     addon.websiteUrl = data.websiteUrl;
     addon.fileDate = latestFile.fileDate;
     addon.fingerPrint = latestFile.packageFingerprint;
