@@ -1,18 +1,18 @@
 "use strict";
 
-const Settings = require("../lib/settings");
+const Storage = require("../lib/Storage");
 
 async function getSetting(args) {
-    const { data } = args;
-    await Settings.load();
-    return Settings[data.setting];
+    const {data} = args;
+    await Storage.load();
+    return Storage[data.setting];
 }
 
 async function setSetting(args) {
-    const { data } = args;
-    await Settings.load();
-    Settings[data.setting] = data.value;
-    return Settings.save();
+    const {data} = args;
+    await Storage.load();
+    Storage[data.setting] = data.value;
+    return Storage.save();
 }
 
-module.exports = { getSetting, setSetting };
+module.exports = {getSetting, setSetting};

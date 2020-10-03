@@ -3,40 +3,35 @@ const fsPromises = fs.promises;
 const path = require("path");
 const parseTOC = require("./TocFileParser");
 const Structure = require("./Structure");
+const Addon = require("./Addon");
 
 class Game {
 	constructor(wowPath, gameType) {
 		this.structure = new Structure(wowPath, gameType);
-		this.addons = { main: [], dependencies: [] };
+	}
+
+	get addonsPath() {
+		return this.structure.addons;
 	}
 
 	async getAddonsList() {
 		const addonPath = this.structure.addons;
 		const tocFiles = await this.getTocFiles(addonPath);
 
+		const addons = {};
 		await Promise.all(
 			tocFiles.map(async (file) => {
 				const data = await parseTOC(file);
-				const addon = {
-					author: data.author,
-					installedVersion: data.version,
-					version: 'N/A',
-					name: data.title,
-					dependencies: data.dependencies,
-				};
-				this.addAddon(addon);
+
+				if (!data.dependencies && data.version) {
+					const addon = new Addon(data.title, data.version, data.author);
+					addons[addon.name] = addon;
+				}
+
 			})
 		);
 
-		return this.addons.main;
-	}
-
-	addAddon(data) {
-		if (!data.dependencies) {
-			this.addons.main.push(data);
-		} else {
-			this.addons.dependencies.push(data);
-		}
+		return addons;
 	}
 
 	async getTocFiles(addonPath) {

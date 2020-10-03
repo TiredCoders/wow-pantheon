@@ -4,6 +4,7 @@ const { ipcRenderer } = window;
 const addons = {
     search: (name) => call('api-addons', 'search', { name }),
     list: () => call('api-addons', 'list'),
+    install: (data) => call('api-addons', 'install', data),
 };
 
 const settings = {
