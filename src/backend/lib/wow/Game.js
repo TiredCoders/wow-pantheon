@@ -46,8 +46,7 @@ class Game {
 					const dir = path.join(addonPath, item.name);
 					const files = await fsPromises.readdir(dir);
 					files.forEach((file) => {
-						const ext = path.extname(file);
-						if (ext === ".toc") {
+						if (path.extname(file).toLowerCase() === '.toc') {
 							tocFiles.push(path.join(dir, file));
 						}
 					});
