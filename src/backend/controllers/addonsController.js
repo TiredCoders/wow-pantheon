@@ -4,7 +4,7 @@ const Curseforge = require('../providers/curseforge');
 const Parser = require('../providers/parser');
 const Game = require('../lib/wow/Game');
 const Storage = require("../lib/Storage");
-const {download, unzip} = require("../lib/utils");
+const { download, unzip } = require("../lib/utils");
 const fs = require('fs');
 
 async function getInstalled(args) {
@@ -29,7 +29,7 @@ async function getInstalled(args) {
 }
 
 async function search(args) {
-    const {data} = args;
+    const { data } = args;
     let result = [];
     let addons = [];
 
@@ -50,7 +50,7 @@ async function search(args) {
 async function install(args) {
     console.log(args);
 
-    const {data} = args;
+    const { data } = args;
     await Storage.load();
     if (!Storage.wowpath) {
         throw new Error("Wow Path not defined");
@@ -60,7 +60,7 @@ async function install(args) {
 
     console.log('Downloading:', data.downloadUrl);
     // --- download ---
-    const file = await download(data.downloadUrl, game.addonsPath, (res) => {console.log(res)});
+    const file = await download(data.downloadUrl, game.addonsPath, (res) => { console.log(res) });
     console.log("\nDecompress\n");
     const result = await unzip(file, game.addonsPath);
     console.log(`\nDecompressed ${result} elements\n`);
@@ -73,4 +73,31 @@ async function install(args) {
 
 }
 
-module.exports = {getInstalled, search, install};
+async function searchForUpdates(args) {
+    await Storage.load();
+    if (!Storage.wowpath) {
+        throw new Error("Wow Path not defined");
+    }
+
+    if (!Storage.hasAddons()) {
+        console.log('No addons', Storage.addons);
+        return null;
+    }
+
+    const addons = Storage.getAddonsHasArray()
+    //console.log('--- searchForUpdates ---', addons);
+    const addon = addons[0];
+    console.log('search for', addon);
+    const result = await processAddon(addon);
+    //console.log('remote version:', result);
+    const parsedAddon = await Parser.getAddon(result, Parser.gameFlavor.retail, Parser.releaseType.final, '9.0.1');
+    console.log('parsed addon', parsedAddon);
+}
+
+async function processAddon(addon) {
+    const result = await Curseforge.searchAddon(addon.name);
+    return result.find(item => item.name.toLowerCase() === addon.name.toLowerCase());
+}
+
+
+module.exports = { getInstalled, search, install, searchForUpdates };
