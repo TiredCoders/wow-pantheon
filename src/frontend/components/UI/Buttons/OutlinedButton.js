@@ -7,10 +7,10 @@ const OutlinedButton = styled.button`
 	svg {
 		font-size: 14px;
 	}
-	border: 1px solid ${UIToken.secondaryColor};
+	border: 1px solid ${UIToken.primary10};
 	outline: none;
 	cursor: pointer;
-	background-color: ${UIToken.secondaryColor};
+	background-color: ${UIToken.primary10};
 	margin: ${({ margin }) => margin};
 `;
 

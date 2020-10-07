@@ -20,13 +20,13 @@ const BoxScroll = styled(Box)`
 	::-webkit-scrollbar-thumb {
 		border-radius: 10px;
 		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-		background-color: ${UIToken.neutralDark};
+		background-color: ${UIToken.primary10};
 	}
 `;
 
 const GlobalStyles = createGlobalStyle`
 	body {
-		background-color: ${UIToken.neutral};
+		background-color: ${UIToken.primary70};
 	}
 
 	::-webkit-scrollbar-track {
@@ -42,12 +42,10 @@ export const MainTemplate = () => (
 			<BoxScroll fullHeight overflow="auto">
 				<Box
 					flexGrow={1}
-					color={UIToken.secondaryColor}
-					background={UIToken.neutralDark}
-					borderRadius="5px"
+					color={UIToken.primary10}
+					background={UIToken.primary70}
 					padding={[UIToken.spacingMd]}
-					margin={[UIToken.spacingMd]}
-					minHeight="calc(100% - 61px)"
+					minHeight="calc(100% - 31px)"
 				>
 					<ContentRouter />
 				</Box>

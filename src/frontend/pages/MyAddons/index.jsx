@@ -19,7 +19,7 @@ const MyAddons = () => {
 
 	return (
 		<>
-			<H1>Explores</H1>
+			<H1>My Addons</H1>
 			<Box fullWidth fullHeight margin={[UIToken.spacingMd, 0]}>
 				<MyAddonsList addonsList={addonsList} loading={loadingList} />
 			</Box>

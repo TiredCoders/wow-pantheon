@@ -13,7 +13,7 @@ const StyledBox = styled(Box)`
 		border-collapse: collapse;
 		width: 100%;
 		tr {
-			border-bottom: 1px solid ${UIToken.secondaryColor};
+			border-bottom: 1px solid ${UIToken.primary10};
 
 			td,
 			th {

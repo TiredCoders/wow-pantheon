@@ -1,4 +1,10 @@
 export default {
+	primary90: "#180d21",
+	primary70: "#2c183c",
+	primary50: "#77459e",
+	primary30: "#c9b1dc",
+	primary10: "#f5e9ff",
+
 	neutral: "#383737",
 	neutralDark: "#202020",
 

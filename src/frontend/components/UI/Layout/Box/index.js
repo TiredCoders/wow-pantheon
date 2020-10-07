@@ -35,6 +35,7 @@ export const Box = styled.div`
 	flex-shrink: ${({ flexShrink }) => flexShrink};
 	flex-basis: ${({ flexBasis }) => flexBasis};
 
+	border: ${({ border }) => border};
 	border-width: ${({ borderWidth, borderUnit }) =>
 		!Array.isArray(borderWidth) ? borderWidth : borderWidth.join(`${borderUnit} `) + borderUnit};
 
