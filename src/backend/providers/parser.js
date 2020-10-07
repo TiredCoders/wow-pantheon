@@ -14,19 +14,17 @@ const gameFlavor = {
 };
 
 async function getAddon(data, gameFlavor, releaseType, gameVersion) {
-    let latestFile = {};
+    const latestFile = data.latestFiles.find((file) => (
+        file.gameVersionFlavor === gameFlavor &&
+        file.releaseType === releaseType &&
+        file.gameVersion.indexOf(gameVersion) !== false
+    ));
 
-    data.latestFiles.reverse().forEach((file) => {
-        const isSameGame = file.gameVersionFlavor === gameFlavor;
-        const isRightRelease = file.releaseType === releaseType;
-        if (isSameGame && isRightRelease && file.gameVersion.indexOf(gameVersion) !== false) {
-            latestFile = file;
-            return;
-        }
-    });
+    if (!latestFile) {
+        return null;
+    }
 
-    /* console.log('parser - getAddon/data', data);
-    console.log('parser - getAddon/latestsFiles', latestFile); */
+    const thumbnail = data.attachments.find(o => o.isDefault && o.thumbnailUrl.length > 1);
 
     const addon = new Addon(data.name);
     addon.author = data.authors.map(o => o.name).join(' - ');
@@ -37,7 +35,9 @@ async function getAddon(data, gameFlavor, releaseType, gameVersion) {
     addon.websiteUrl = data.websiteUrl;
     addon.fileDate = latestFile.fileDate;
     addon.fingerPrint = latestFile.packageFingerprint;
+    addon.thumbnail = thumbnail ? thumbnail.thumbnailUrl : null;
+
     return addon.hasRequiredDownloadInfo() ? addon : null;
 }
 
-module.exports = {getAddon, gameFlavor, releaseType};
+module.exports = { getAddon, gameFlavor, releaseType };
