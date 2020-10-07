@@ -65,6 +65,7 @@ async function install(args) {
     const result = await unzip(file, game.addonsPath);
     console.log(`\nDecompressed ${result} elements\n`);
 
+    data.providerName = 'curseforge';
     Storage.addAddon(data);
     await Storage.save();
 

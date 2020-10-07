@@ -14,6 +14,9 @@ const MyAddons = () => {
 		addons.list().then((res) => {
 			setLoadingList(false);
 			setAddonsList(res);
+			return addons.searchForUpdates();
+		}).then(() => {
+			console.log('DONE');
 		});
 	}, []);
 

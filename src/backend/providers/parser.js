@@ -27,7 +27,7 @@ async function getAddon(data, gameFlavor, releaseType, gameVersion) {
     const thumbnail = data.attachments.find(o => o.isDefault && o.thumbnailUrl.length > 1);
 
     const addon = new Addon(data.name);
-    addon.author = data.authors.map(o => o.name).join(' - ');
+    addon.author = data.authors.map(o => o.name.charAt(0).toUpperCase() + o.name.substring(1)).join(' - ');
     addon.remoteId = data.id;
     addon.summary = data.summary;
     addon.version = latestFile.displayName;
