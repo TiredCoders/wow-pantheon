@@ -1,7 +1,7 @@
 "use strict";
 
 const ipc = require('electron').ipcMain
-const { getInstalled, search, install } = require('./controllers/addonsController');
+const { getInstalled, search, install, searchForUpdates } = require('./controllers/addonsController');
 const { getSetting, setSetting } = require('./controllers/settingsController');
 const { getDir } = require('./controllers/utilsController');
 
@@ -10,6 +10,7 @@ const routes = {
 		list: getInstalled,
 		search: search,
 		install: install,
+		searchForUpdates: searchForUpdates,
 	},
 	settings: {
 		get: getSetting,

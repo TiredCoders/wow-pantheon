@@ -21,6 +21,12 @@ module.exports = {
 		"react/jsx-props-no-spreading": 0,
 		"import/no-extraneous-dependencies": 0,
 		radix: 0,
+		"space-before-function-paren": ["error", {
+			"anonymous": "ignore",
+			"named": "never",
+			"asyncArrow": "ignore"
+		}],
+		"object-curly-spacing": ["error", "always"]
 	},
 	ignorePatterns: ["src/backend/**/*"],
 };
