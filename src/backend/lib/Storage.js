@@ -3,7 +3,7 @@
 const fs = require("fs");
 const fsPromises = fs.promises;
 const path = require("path");
-const {app} = require('electron');
+const { app } = require('electron');
 
 class Storage {
     constructor() {
@@ -44,11 +44,12 @@ class Storage {
         //todo temporary
         if (this.conf.addons[addon.name]) {
             delete addon.installedVersion;
-            delete addon.dir;
-            this.conf.addons[addon.name] = {...this.conf.addons[addon.name], ...addon};
+            delete addon.installedFolders;
+            this.conf.addons[addon.name] = { ...this.conf.addons[addon.name], ...addon };
         } else {
             this.conf.addons[addon.name] = addon;
         }
+        this.conf.addons[addon.name].installedAt = new Date;
     }
 
     load() {
