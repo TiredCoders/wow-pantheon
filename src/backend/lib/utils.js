@@ -68,7 +68,7 @@ function download(url, dest, callback) {
 					else fs.unlink(dest, () => reject(err.message)); // Delete temp file
 				});
 
-				response.on("data", function (chunk) {
+				response.on("data", function(chunk) {
 					// Update the received bytes
 					received_bytes += chunk.length;
 					callback(received_bytes, total_bytes);
@@ -83,7 +83,7 @@ function download(url, dest, callback) {
 			}
 		});
 
-		request.on("response", function (data) {
+		request.on("response", function(data) {
 			// Change the total bytes value to get progress later.
 			total_bytes = parseInt(data.headers["content-length"]);
 		});
@@ -113,4 +113,14 @@ function unzip(filePath, outPath) {
 	});
 }
 
-module.exports = { httpGet, download, unzip, dirSelector, };
+function dateIsBiggerThan(string1, string2) {
+	const dt1 = Date.parse(string1);
+	const dt2 = Date.parse(string2);
+
+	if (isNaN(dt1) || (!isNaN(dt2) && dt1 > dt2)) {
+		return false;
+	}
+	return true;
+}
+
+module.exports = { httpGet, download, unzip, dirSelector, dateIsBiggerThan };

@@ -4,7 +4,7 @@ const Curseforge = require('../providers/curseforge');
 const Parser = require('../providers/parser');
 const Game = require('../lib/wow/Game');
 const Storage = require("../lib/Storage");
-const { download, unzip } = require("../lib/utils");
+const { download, unzip, dateIsBiggerThan } = require("../lib/utils");
 const fs = require('fs');
 
 async function getInstalled(args) {
@@ -86,13 +86,19 @@ async function searchForUpdates(args) {
     }
 
     const addons = Storage.getAddonsHasArray()
-    //console.log('--- searchForUpdates ---', addons);
-    const addon = addons[0];
-    console.log('search for', addon);
-    const result = await processAddon(addon);
-    //console.log('remote version:', result);
-    const parsedAddon = await Parser.getAddon(result, Parser.gameFlavor.retail, Parser.releaseType.final, '9.0.1');
-    console.log('parsed addon', parsedAddon);
+
+    const addonsToUpdate = [];
+    for (const addon of addons) { //TODO use something promise.all but with limit es: p-limit
+        console.log('search for', addon);
+        const result = await processAddon(addon);
+        const parsedAddon = await Parser.getAddon(result, Parser.gameFlavor.retail, Parser.releaseType.final, '9.0.1');
+        console.log('parsed addon', parsedAddon);
+        if (parsedAddon && dateIsBiggerThan(parsedAddon.fileDate, addon.fileDate)) {
+            addonsToUpdate.push(parsedAddon);
+        }
+    }
+
+    return addonsToUpdate;
 }
 
 async function processAddon(addon) {

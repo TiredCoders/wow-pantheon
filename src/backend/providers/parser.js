@@ -14,6 +14,10 @@ const gameFlavor = {
 };
 
 async function getAddon(data, gameFlavor, releaseType, gameVersion) {
+    if (!data || !data.latestFiles) {
+        return null
+    };
+
     const latestFile = data.latestFiles.find((file) => (
         file.gameVersionFlavor === gameFlavor &&
         file.releaseType === releaseType &&
