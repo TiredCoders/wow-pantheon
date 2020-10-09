@@ -26,12 +26,15 @@ const MyAddons = () => {
 	}, []);
 
 	const scanUpdates = useCallback(() => {
-		console.log("updates!");
-	});
+		console.log("scan updates");
+		addons.searchForUpdates().then((res) => {
+			console.log(res);
+		});
+	}, []);
 
 	const scanFolder = useCallback(() => {
 		console.log("scan folder!");
-	});
+	}, []);
 
 	return (
 		<>
