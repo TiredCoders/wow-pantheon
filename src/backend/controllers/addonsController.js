@@ -108,22 +108,34 @@ async function searchForUpdates(args) {
     const addons = Storage.getAddonsHasArray()
 
     const addonsToUpdate = [];
+    let shouldSave = false;
     for (const addon of addons) { //TODO use something promise.all but with limit es: p-limit
-        console.log('search for', addon);
         const result = await processAddon(addon);
         const parsedAddon = await Parser.getAddon(result, Parser.gameFlavor.retail, Parser.releaseType.final, '9.0.1');
-        console.log('parsed addon', parsedAddon);
+
         if (parsedAddon && dateIsBiggerThan(parsedAddon.fileDate, addon.fileDate)) {
-            addonsToUpdate.push(parsedAddon);
+
+            if (addon.installedVersion !== parsedAddon.version) {
+                addonsToUpdate.push(parsedAddon);
+            } else if (addon.remoteId === null) {//when addon is not installed with the app, we miss details...so we add them
+                Storage.addAddon(parsedAddon);
+                shouldSave = true;
+            }
         }
     }
-
+    if (shouldSave) {
+        await Storage.save();
+    }
     return addonsToUpdate;
 }
 
 async function processAddon(addon) {
-    const result = await Curseforge.searchAddon(addon.name);
-    return result.find(item => item.name.toLowerCase() === addon.name.toLowerCase());
+    if (addon.remoteId) {
+        return Curseforge.getAddonInfo(addon.remoteId);
+    } else {
+        const result = await Curseforge.searchAddon(addon.name);
+        return result.find(item => item.name.toLowerCase() === addon.name.toLowerCase());
+    }
 }
 
 

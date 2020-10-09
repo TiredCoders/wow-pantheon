@@ -16,6 +16,7 @@ class Curseforge {
 	}
 
 	searchAddon(name) {
+		name = escape(name);
 		return this.fetch('GET', `search?gameId=1&pageSize=10&searchFilter=${name}`);
 	}
 
