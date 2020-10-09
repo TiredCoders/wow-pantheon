@@ -14,6 +14,7 @@ const addons = {
     list: () => call('api-addons', 'list'),
     install: (data) => call('api-addons', 'install', data),
     searchForUpdates: () => call('api-addons', 'searchForUpdates'),
+    featured: () => call('api-addons', 'featured'),
 };
 
 const settings = {

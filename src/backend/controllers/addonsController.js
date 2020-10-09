@@ -47,6 +47,25 @@ async function search(args) {
     return addons;
 }
 
+async function featured(args) {
+    let result = [];
+    let addons = [];
+
+    result = await Curseforge.getFeatured();
+    const toParse = result.Popular;
+    await Promise.all(
+        toParse.map(async (item) => {
+            const addon = await Parser.getAddon(item, Parser.gameFlavor.retail, Parser.releaseType.final, '9.0.1');
+            if (addon) {
+                addons.push(addon);
+            }
+        })
+    );
+
+    return addons;
+}
+
+
 async function install(args) {
     console.log(args);
 
@@ -107,4 +126,4 @@ async function processAddon(addon) {
 }
 
 
-module.exports = { getInstalled, search, install, searchForUpdates };
+module.exports = { getInstalled, search, install, searchForUpdates, featured };

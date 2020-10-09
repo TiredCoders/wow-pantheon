@@ -1,8 +1,8 @@
 "use strict";
 
-const { httpGet } = require("../lib/utils");
+const { httpGet, httpPost } = require("../lib/utils");
 
-const CURSEFORGE_API = "https://addons-ecs.forgesvc.net/api/v2/addon/";
+const CURSEFORGE_API = "https://addons-ecs.forgesvc.net/api/v2/addon";
 const RELEASE_ALPHA = 3;
 const RELEASE_BETA = 2;
 const RELEASE_FINAL = 1;
@@ -17,6 +17,16 @@ class Curseforge {
 
 	searchAddon(name) {
 		return this.fetch(`search?gameId=1&pageSize=10&searchFilter=${name}`);
+	}
+
+	getFeatured() {
+		return this.ask('featured', {
+			"GameId": 1,
+			"addonIds": [],
+			"featuredCount": 6,
+			"popularCount": 14,
+			"updatedCount": 14
+		});
 	}
 
 	getDownloadUrl(addonId, fileId) {
@@ -50,6 +60,15 @@ class Curseforge {
 
 	fetch(endpoint) {
 		return httpGet(CURSEFORGE_API + endpoint);
+	}
+
+	ask(endpoint, body = null) {
+		return httpPost({
+			hostname: 'addons-ecs.forgesvc.net',
+			path: `/api/v2/addon/${endpoint}`,
+			headers: { 'Content-Type': 'application/json', },
+			body: JSON.stringify(body),
+		})
 	}
 }
 

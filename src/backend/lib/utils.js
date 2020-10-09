@@ -35,6 +35,27 @@ function httpGet(url) {
 	});
 }
 
+function httpPost({ body, ...options }) {
+	return new Promise((resolve, reject) => {
+		const req = https.request({
+			method: 'POST',
+			...options,
+		}, res => {
+			const chunks = [];
+			res.on('data', data => chunks.push(data))
+			res.on('end', () => {
+				const body = Buffer.concat(chunks);
+				resolve(parseResponse(body));
+			})
+		})
+		req.on('error', reject);
+		if (body) {
+			req.write(body);
+		}
+		req.end();
+	})
+}
+
 function parseResponse(str) {
 	try {
 		return JSON.parse(str);
@@ -123,4 +144,4 @@ function dateIsBiggerThan(string1, string2) {
 	return true;
 }
 
-module.exports = { httpGet, download, unzip, dirSelector, dateIsBiggerThan };
+module.exports = { httpGet, download, unzip, dirSelector, dateIsBiggerThan, httpPost };
