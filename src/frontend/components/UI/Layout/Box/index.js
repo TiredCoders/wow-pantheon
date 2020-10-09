@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
 export const Box = styled.div`
+	cursor: ${({ cursor }) => cursor};
 	background: ${({ background }) => background};
 	color: ${({ color }) => color};
 	z-index: ${({ elevation }) => elevation};
@@ -53,6 +54,8 @@ export const Box = styled.div`
 		css`
 			height: 100%;
 		`}
+
+		font-size: ${({ fontSize }) => fontSize};
 `;
 
 Box.propTypes = {

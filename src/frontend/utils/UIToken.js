@@ -5,6 +5,16 @@ export default {
 	primary30: "#c9b1dc",
 	primary10: "#f5e9ff",
 
+	gray90: "#212121",
+	gray80: "#424242",
+	gray70: "#616161",
+	gray60: "#757575",
+	gray50: "#9e9e9e",
+	gray40: "#bdbdbd",
+	gray30: "#e0e0e0",
+	gray20: "#eeeeee",
+	gray10: "#f5f5f5",
+
 	neutral: "#383737",
 	neutralDark: "#202020",
 

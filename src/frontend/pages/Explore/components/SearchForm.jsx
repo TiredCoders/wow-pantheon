@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import OutlinedInput from "../../../components/UI/Inputs/OutlinedInput";
-import OutlinedButton from "../../../components/UI/Buttons/OutlinedButton";
 
 const SearchForm = ({ onSubmitCallback }) => {
 	const [searchText, setSearchText] = useState();
@@ -16,8 +15,8 @@ const SearchForm = ({ onSubmitCallback }) => {
 
 	return (
 		<form onSubmit={onSubmit}>
-			<OutlinedInput onChange={onChange} placeholder="Search for an addon..." />
-			<OutlinedButton type="submit">Search</OutlinedButton>
+			<OutlinedInput onChange={onChange} placeholder="Search addon..." />
+			{/* <OutlinedButton type="submit">Search</OutlinedButton> */}
 		</form>
 	);
 };
