@@ -16,29 +16,9 @@ async function dirSelector(title = "Directory selector", buttonLabel = "Select")
 	return !result.canceled ? result.filePaths[0] : null;
 }
 
-function httpGet(url) {
-	return new Promise((resolve, rejects) => {
-		https
-			.get(url, (resp) => {
-				let data = "";
-
-				resp.on("data", (chunk) => {
-					data += chunk;
-				});
-				resp.on("end", () => {
-					resolve(parseResponse(data));
-				});
-			})
-			.on("error", (err) => {
-				rejects(err);
-			});
-	});
-}
-
-function httpPost({ body, ...options }) {
+function httpCall({ body, ...options }) {
 	return new Promise((resolve, reject) => {
 		const req = https.request({
-			method: 'POST',
 			...options,
 		}, res => {
 			const chunks = [];
@@ -144,4 +124,4 @@ function dateIsBiggerThan(string1, string2) {
 	return true;
 }
 
-module.exports = { httpGet, download, unzip, dirSelector, dateIsBiggerThan, httpPost };
+module.exports = { httpCall, download, unzip, dirSelector, dateIsBiggerThan };

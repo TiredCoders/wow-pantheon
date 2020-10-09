@@ -53,6 +53,7 @@ async function featured(args) {
 
     result = await Curseforge.getFeatured();
     const toParse = result.Popular;
+
     await Promise.all(
         toParse.map(async (item) => {
             const addon = await Parser.getAddon(item, Parser.gameFlavor.retail, Parser.releaseType.final, '9.0.1');
