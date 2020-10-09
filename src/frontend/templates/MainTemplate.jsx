@@ -1,10 +1,10 @@
 import React from "react";
+import styled, { createGlobalStyle } from "styled-components";
 import FlexBox from "../components/UI/Layout/FlexBox";
 import Box from "../components/UI/Layout/Box";
 import Navbar from "../components/Navbar";
 import ContentRouter from "../components/ContentRouter";
 import UIToken from "../utils/UIToken";
-import styled, { createGlobalStyle } from "styled-components";
 
 const BoxScroll = styled(Box)`
 	::-webkit-scrollbar-track {
@@ -20,17 +20,13 @@ const BoxScroll = styled(Box)`
 	::-webkit-scrollbar-thumb {
 		border-radius: 10px;
 		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-		background-color: ${UIToken.primary10};
+		background-color: ${UIToken.gray70};
 	}
 `;
 
 const GlobalStyles = createGlobalStyle`
 	body {
-		background-color: ${UIToken.primary70};
-	}
-
-	::-webkit-scrollbar-track {
-		background-color:red;
+		background-color: ${UIToken.gray90};
 	}
 `;
 
@@ -39,14 +35,8 @@ export const MainTemplate = () => (
 		<GlobalStyles />
 		<FlexBox direction="column" height="100%">
 			<Navbar />
-			<BoxScroll fullHeight overflow="auto">
-				<Box
-					flexGrow={1}
-					color={UIToken.primary10}
-					background={UIToken.primary70}
-					padding={[UIToken.spacingMd]}
-					minHeight="calc(100% - 31px)"
-				>
+			<BoxScroll fullHeight overflow="auto" flexGrow={1}>
+				<Box flexGrow={1} color={UIToken.gray10} background={UIToken.gray90} minHeight="100%">
 					<ContentRouter />
 				</Box>
 			</BoxScroll>

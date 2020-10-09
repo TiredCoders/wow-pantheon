@@ -24,7 +24,7 @@ const LinkBox = styled(Box)`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		color: white;
+		color: ${UIToken.gray10};
 		svg {
 			font-size: 22px;
 			margin-bottom: 3px;
@@ -34,7 +34,7 @@ const LinkBox = styled(Box)`
 		}
 
 		:hover {
-			color: ${UIToken.primary10};
+			color: ${UIToken.primary50};
 		}
 
 		text-decoration: none;
@@ -42,7 +42,7 @@ const LinkBox = styled(Box)`
 		cursor: pointer;
 
 		&.active {
-			color: ${UIToken.primary10};
+			color: ${UIToken.primary50};
 		}
 
 		transition: color 0.2s ease-in-out;
@@ -53,7 +53,7 @@ export default function Navbar() {
 	return (
 		<Nav
 			className="Navbar"
-			background={UIToken.primary90}
+			background={UIToken.primary70}
 			fullWidth
 			display="flex"
 			justifyContent="space-between"

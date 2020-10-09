@@ -23,17 +23,19 @@ const Explore = () => {
 	const installAddon = useCallback((row) => {
 		console.log("Install Callback!", row);
 		addons.install(row).then((result) => {
-			console.log('Finish installation', result);
+			console.log("Finish installation", result);
 		});
 	}, []);
 
 	return (
 		<>
-			<H1>Explore</H1>
-			<Box fullWidth>
+			<Box padding={[0, UIToken.spacingSm]}>
+				<H1>Explore</H1>
+			</Box>
+			<Box fullWidth padding={[UIToken.spacingSm]} boxSizing="border-box">
 				<SearchForm onSubmitCallback={searchAddons} />
 			</Box>
-			<Box margin={[UIToken.spacingMd, 0]}>
+			<Box padding={[UIToken.spacingMd, 0]}>
 				<ExploreList addonsList={addonsList} loading={loadingList} installCb={installAddon} />
 			</Box>
 		</>

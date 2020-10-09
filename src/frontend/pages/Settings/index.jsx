@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
+import FolderIcon from "@material-ui/icons/Folder";
 import styled from "styled-components";
 import H1 from "../../components/UI/Heading";
+import FlexBox from "../../components/UI/Layout/FlexBox";
 import Box from "../../components/UI/Layout/Box";
 import UIToken from "../../utils/UIToken";
-import OutlinedInput from "../../components/UI/Inputs/OutlinedInput";
+import { OutlinedInputWIcon } from "../../components/UI/Inputs/OutlinedInput";
 import OutlinedButton from "../../components/UI/Buttons/OutlinedButton";
 import { settings, dialog } from "../../utils/Client";
-import FolderIcon from "@material-ui/icons/Folder";
 
 const TableStyles = styled(Box)`
 	table {
@@ -54,23 +55,45 @@ const Settings = () => {
 
 	return (
 		<>
-			<H1>Settings</H1>
+			<Box padding={[0, UIToken.spacingSm]}>
+				<H1>Settings</H1>
+			</Box>
 			<TableStyles fullWidth fullHeight margin={[UIToken.spacingMd, 0]}>
 				<table>
 					<tbody>
 						<tr>
 							<td>WoW path</td>
 							<td>
-								<OutlinedInput value={wowPath} onChange={onChangeWowPath} />
-								<OutlinedButton onClick={onChoosePath} margin="0 25px 0 0">
-									<FolderIcon />
-								</OutlinedButton>
-								<OutlinedButton onClick={onWowPathSave}>Save</OutlinedButton>
+								<FlexBox alignItems="center">
+									<OutlinedInputWIcon value={wowPath} onChange={onChangeWowPath} />
+									<Box
+										padding={[5, 10]}
+										onClick={onChoosePath}
+										margin="0 25px 0 0"
+										position="relative"
+										left="-40px"
+										backgroundColor="transparent"
+										border="0"
+										height="30px"
+										display="flex"
+										alignItems="center"
+										fontSize="14px"
+										color={UIToken.gray90}
+										cursor="pointer"
+									>
+										<FolderIcon />
+									</Box>
+								</FlexBox>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</TableStyles>
+			<Box padding={[UIToken.spacingSm]}>
+				<OutlinedButton onClick={onWowPathSave} padding={[UIToken.spacingSm, UIToken.spacingMd]}>
+					Save Settings
+				</OutlinedButton>
+			</Box>
 		</>
 	);
 };

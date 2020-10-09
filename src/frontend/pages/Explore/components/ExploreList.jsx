@@ -6,22 +6,10 @@ import Box from "../../../components/UI/Layout/Box";
 import UIToken from "../../../utils/UIToken";
 import columns from "./columns";
 import ExploreListRow from "./ExploreListRow";
+import TableStyles from "../../../components/UI/Table/TableStyles";
 
 const StyledBox = styled(Box)`
-	overflow: auto;
-	table {
-		border-collapse: collapse;
-		width: 100%;
-		tr {
-			border-bottom: 1px solid ${UIToken.primary10};
-
-			td,
-			th {
-				text-align: left;
-				padding: ${UIToken.spacingMd}px;
-			}
-		}
-	}
+	${TableStyles}
 `;
 
 export const ExploreList = ({ addonsList, installCb, loading = false }) => {

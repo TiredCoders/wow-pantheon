@@ -11,19 +11,24 @@ const MyAddons = () => {
 
 	useEffect(() => {
 		setLoadingList(true);
-		addons.list().then((res) => {
-			setLoadingList(false);
-			setAddonsList(res);
-			return addons.searchForUpdates();
-		}).then(() => {
-			console.log('DONE');
-		});
+		addons
+			.list()
+			.then((res) => {
+				setLoadingList(false);
+				setAddonsList(res);
+				return addons.searchForUpdates();
+			})
+			.then(() => {
+				console.log("DONE");
+			});
 	}, []);
 
 	return (
 		<>
-			<H1>My Addons</H1>
-			<Box fullWidth fullHeight margin={[UIToken.spacingMd, 0]}>
+			<Box padding={[0, UIToken.spacingSm]}>
+				<H1>My Addons</H1>
+			</Box>
+			<Box fullWidth fullHeight margin={[UIToken.spacingSm, 0]}>
 				<MyAddonsList addonsList={addonsList} loading={loadingList} />
 			</Box>
 		</>
