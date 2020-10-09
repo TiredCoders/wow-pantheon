@@ -8,6 +8,7 @@ import UIToken from "../../utils/UIToken";
 import { OutlinedInputWIcon } from "../../components/UI/Inputs/OutlinedInput";
 import OutlinedButton from "../../components/UI/Buttons/OutlinedButton";
 import { settings, dialog } from "../../utils/Client";
+import PrimaryContainedButton from "../../components/UI/Buttons/PrimaryContainedButton";
 
 const TableStyles = styled(Box)`
 	table {
@@ -90,9 +91,7 @@ const Settings = () => {
 				</table>
 			</TableStyles>
 			<Box padding={[UIToken.spacingSm]}>
-				<OutlinedButton onClick={onWowPathSave} padding={[UIToken.spacingSm, UIToken.spacingMd]}>
-					Save Settings
-				</OutlinedButton>
+				<PrimaryContainedButton onClick={onWowPathSave}>Save</PrimaryContainedButton>
 			</Box>
 		</>
 	);
