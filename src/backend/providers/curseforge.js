@@ -1,8 +1,8 @@
 "use strict";
 
-const { httpGet, httpPost } = require("../lib/utils");
+const { httpPost, httpCall } = require("../lib/utils");
 
-const CURSEFORGE_API = "https://addons-ecs.forgesvc.net/api/v2/addon";
+const CURSEFORGE_HOST = "addons-ecs.forgesvc.net"
 const RELEASE_ALPHA = 3;
 const RELEASE_BETA = 2;
 const RELEASE_FINAL = 1;
@@ -12,25 +12,26 @@ const GAME_VERSION = "8.3.0";
 
 class Curseforge {
 	getAddonInfo(addonId) {
-		return this.fetch(addonId);
+		return this.fetch('GET', addonId);
 	}
 
 	searchAddon(name) {
-		return this.fetch(`search?gameId=1&pageSize=10&searchFilter=${name}`);
+		name = escape(name);
+		return this.fetch('GET', `search?gameId=1&pageSize=10&searchFilter=${name}`);
 	}
 
 	getFeatured() {
-		return this.ask('featured', {
+		return this.fetch('POST', 'featured', {
 			"GameId": 1,
-			"addonIds": [],
-			"featuredCount": 6,
-			"popularCount": 14,
-			"updatedCount": 14
+			"popularCount": 10,
+			/* "addonIds": [],
+			"featuredCount": 2,
+			"updatedCount": 2, */
 		});
 	}
 
 	getDownloadUrl(addonId, fileId) {
-		return this.fetch(`${addonId}/file/${fileId}/download-url`);
+		return this.fetch('GET', `${addonId}/file/${fileId}/download-url`);
 	}
 
 	async getFile(addonId, releaseType = 1, gameFlavor = "wow_retail") {
@@ -58,15 +59,12 @@ class Curseforge {
 		};
 	}
 
-	fetch(endpoint) {
-		return httpGet(CURSEFORGE_API + endpoint);
-	}
-
-	ask(endpoint, body = null) {
-		return httpPost({
-			hostname: 'addons-ecs.forgesvc.net',
+	fetch(method, endpoint, body = null) {
+		return httpCall({
+			method: method,
+			hostname: CURSEFORGE_HOST,
+			headers: body ? { 'Content-Type': 'application/json' } : {},
 			path: `/api/v2/addon/${endpoint}`,
-			headers: { 'Content-Type': 'application/json', },
 			body: JSON.stringify(body),
 		})
 	}
