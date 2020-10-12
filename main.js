@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Menu, Tray} = require("electron");
+const { app, BrowserWindow, Menu, Tray } = require("electron");
 const path = require("path");
 const url = require("url");
 require("./src/backend/index");
@@ -52,10 +52,10 @@ function createWindow() {
 
 	createTray();
 
-	//TODO go back to mainwindow.once when fixed Electron bug https://github.com/electron/electron/issues/25253
+	// TODO go back to mainwindow.once when fixed Electron bug https://github.com/electron/electron/issues/25253
 
 	// Don't show until we are ready and loaded
-	//mainWindow.webContents.once('did-finish-load', function () {
+	// mainWindow.webContents.once('did-finish-load', function () {
 	mainWindow.once("ready-to-show", () => {
 		mainWindow.show();
 		// Open the DevTools automatically if developing
@@ -110,15 +110,15 @@ app.on("activate", function() {
 // code. You can also put them in separate files and require them here.
 
 function createTray() {
-	let appIcon = new Tray(path.join(__dirname, "icon16.png"));
+	const appIcon = new Tray(path.join(__dirname, "icon16.png"));
 	const contextMenu = Menu.buildFromTemplate([
 		{
-			label: 'Show', click: function() {
+			label: 'Show', click() {
 				mainWindow.show();
 			}
 		},
 		{
-			label: 'Exit', click: function() {
+			label: 'Exit', click() {
 				app.isQuiting = true;
 				app.quit();
 			}
